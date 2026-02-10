@@ -30,7 +30,7 @@
 	<NavUl>
 		<NavLi href="/">Home</NavLi>
 		<NavLi href="/privacy">Privacy</NavLi>
-		<NavLi href="https://github.com/your-repo" target="_blank">OpenClaw Docs</NavLi>
+		<!-- <NavLi href="https://github.com/your-repo" target="_blank">OpenClaw Docs</NavLi> -->
 	</NavUl>
 </Navbar>
 
