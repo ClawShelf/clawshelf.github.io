@@ -32,7 +32,7 @@ jobs:
           dart pub get
           dart run tool/check_sync.dart ../openclaw_data
 
-  build-and-deploy:
+  build:
     needs: sync_check
     if: needs.sync_check.outputs.build_needed == 'true'
     runs-on: ubuntu-latest
