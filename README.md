@@ -19,5 +19,5 @@ The latest version is always available at:
 ## 📦 About this Repository
 This is a **deployment-only** branch. 
 * **Static Assets:** All HTML, JS, and CSS are pre-rendered via SvelteKit.
-* **Data:** The `assets/` folder contains the latest Isar database and `build.json` synced from OpenClaw.
+* **Data:** The `dist-assets/` folder contains the latest Isar database and `build.json` synced from OpenClaw.
 * **Updates:** This repo is updated automatically every day at 03:15 UTC by our GitHub Actions pipeline.
