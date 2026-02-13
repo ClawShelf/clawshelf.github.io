@@ -4,7 +4,7 @@ on:
   push:
     branches: 'main'
   repository_dispatch:
-    types: [content_updated] # Triggered by OpenClaw
+    types: [content_updated] # Triggered by OpenClaw or ClawShelf
   workflow_dispatch:
 
 permissions:
@@ -13,7 +13,28 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  sync_check:
+    runs-on: ubuntu-latest
+    outputs:
+      build_needed: ${{ steps.gatekeeper.outputs.build_needed }}
+      local_hash: ${{ steps.gatekeeper.outputs.local_hash }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { repository: Clawshelf/Clawshelf, path: app_repo } # We need the tool first
+
+      - uses: actions/checkout@v4
+        with: { repository: 'OpenClaw/OpenClaw', path: openclaw_data, fetch-depth: 1 }
+
+      - name: Run Gatekeeper
+        id: gatekeeper
+        run: |
+          cd app_repo
+          dart pub get
+          dart run tool/check_sync.dart ../openclaw_data
+
+  build-and-deploy:
+    needs: sync_check
+    if: needs.sync_check.outputs.build_needed == 'true'
     runs-on: ubuntu-latest
     steps:
       # 1. Checkout the SvelteKit project (the current repo)
@@ -26,14 +47,14 @@ jobs:
       - name: Checkout App Repo
         uses: actions/checkout@v4
         with:
-          repository: Clawshelf/Clawshelf 
+          repository: Clawshelf/Clawshelf
           path: app_repo
 
       # 3. Checkout the Content (OpenClaw)
       - name: Checkout Content Repo
         uses: actions/checkout@v4
         with:
-          repository: openclaw/openclaw 
+          repository: openclaw/openclaw
           path: openclaw_data
 
       # 4. Setup Node & Build SvelteKit
@@ -61,7 +82,8 @@ jobs:
           # Run tool: reading from ../openclaw_data
           mkdir -p ../pages_repo/static/assets
           dart run tools/package_documents.dart \
-            --openclaw_path ../openclaw_data
+            --openclaw_sha ${{ needs.sync_check.outputs.local_hash }} \
+            --openclaw_path ../openclaw_data \
             --archive
 
           # copy dist to ../pages_repo/static
