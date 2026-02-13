@@ -1,9 +1,10 @@
 <script>
+	import { Button } from 'flowbite-svelte';
 	import { Section } from 'flowbite-svelte-blocks';
 </script>
 
 <svelte:head>
-    <title>ClawShelf</title>
+	<title>ClawShelf</title>
 </svelte:head>
 
 <Section>
@@ -20,12 +21,20 @@
 				Access 600+ OpenClaw agent commands and skills instantly on your mobile device. Offline,
 				fast, and built for engineers.
 			</p>
-			<!-- <Button href="YOUR_PLAY_STORE_LINK" color="primary" size="xl">Download for Android</Button>
-			<Button href="YOUR_PLAY_STORE_LINK" color="primary" size="xl">Download for iOS</Button> -->
+			<Button
+				href="https://play.google.com/store/apps/details?id=com.fengjiongmax.clawshelf"
+				color="primary"
+				size="xl">Download for Android</Button
+			>
+			<Button
+				href="https://apps.apple.com/us/app/clawshelf-openclaw-docs/id6758986679"
+				color="primary"
+				size="xl">Download for iOS</Button
+			>
 		</div>
-		<!-- <div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
-			<img src="/mockup.png" alt="ClawShelf Mockup" />
-		</div> -->
+		<div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
+			<img src="/screenshot.png" alt="ClawShelf Mockup" />
+		</div>
 	</div>
 </Section>
 
