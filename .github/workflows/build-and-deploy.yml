@@ -26,14 +26,14 @@ jobs:
       - name: Checkout App Repo
         uses: actions/checkout@v4
         with:
-          repository: Clawshelf/claw_shelf # <--- UPDATE THIS
+          repository: Clawshelf/Clawshelf 
           path: app_repo
 
       # 3. Checkout the Content (OpenClaw)
       - name: Checkout Content Repo
         uses: actions/checkout@v4
         with:
-          repository: openclaw/openclaw # <--- UPDATE THIS
+          repository: openclaw/openclaw 
           path: openclaw_data
 
       # 4. Setup Node & Build SvelteKit
