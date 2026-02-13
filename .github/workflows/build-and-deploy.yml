@@ -64,7 +64,7 @@ jobs:
             --openclaw_path ../openclaw_data
 
           # copy dist to ../pages_repo/static
-          cp dist/* ../pages_repo/static/dist-assets
+          mv dist ../pages_repo/static/dist-assets
 
       # 6. Build SvelteKit (now including the new assets in 'static/')
       - name: Build SvelteKit
