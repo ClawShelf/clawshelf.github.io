@@ -60,7 +60,7 @@ jobs:
           flutter pub get
           # Run tool: reading from ../openclaw_data, outputting to ../pages_repo/static/assets
           mkdir -p ../pages_repo/static/assets
-          dart run tool/package_documents.dart \
+          dart run tools/package_documents.dart \
             --openclaw_path ../openclaw_data \
             --output ../pages_repo/static/assets
 
