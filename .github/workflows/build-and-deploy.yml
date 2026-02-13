@@ -58,11 +58,13 @@ jobs:
         run: |
           cd app_repo
           flutter pub get
-          # Run tool: reading from ../openclaw_data, outputting to ../pages_repo/static/assets
+          # Run tool: reading from ../openclaw_data
           mkdir -p ../pages_repo/static/assets
           dart run tools/package_documents.dart \
-            --openclaw_path ../openclaw_data \
-            --output ../pages_repo/static/assets
+            --openclaw_path ../openclaw_data
+
+          # copy dists to ../pages_repo/static
+          cp dists/* ../pages_repo/static/dist-assets
 
       # 6. Build SvelteKit (now including the new assets in 'static/')
       - name: Build SvelteKit
