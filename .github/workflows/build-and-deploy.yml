@@ -38,7 +38,7 @@ jobs:
         run: |
           cd app_repo
           flutter pub get
-          dart run tool/check_sync.dart ../openclaw_data
+          dart run tools/check_sync.dart ../openclaw_data
 
   build:
     needs: sync_check
