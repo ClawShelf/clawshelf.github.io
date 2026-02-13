@@ -63,8 +63,8 @@ jobs:
           dart run tools/package_documents.dart \
             --openclaw_path ../openclaw_data
 
-          # copy dists to ../pages_repo/static
-          cp dists/* ../pages_repo/static/dist-assets
+          # copy dist to ../pages_repo/static
+          cp dist/* ../pages_repo/static/dist-assets
 
       # 6. Build SvelteKit (now including the new assets in 'static/')
       - name: Build SvelteKit
