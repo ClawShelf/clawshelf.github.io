@@ -62,6 +62,7 @@ jobs:
           mkdir -p ../pages_repo/static/assets
           dart run tools/package_documents.dart \
             --openclaw_path ../openclaw_data
+            --archive
 
           # copy dist to ../pages_repo/static
           mv dist ../pages_repo/static/dist-assets
