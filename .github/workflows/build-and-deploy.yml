@@ -40,9 +40,21 @@ jobs:
       - name: Run Gatekeeper
         id: gatekeeper
         run: |
-          cd app_repo
-          flutter pub get
-          dart run tools/check_sync.dart ../openclaw_data
+          # 1. Determine if we should bypass based on event type
+          # repository_dispatch and workflow_dispatch will force a build
+          if [[ "${{ github.event_name }}" == "repository_dispatch" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Bypassing sync check due to dispatch trigger."
+            echo "build_needed=true" >> $GITHUB_OUTPUT
+            
+            # We still need a hash for the packager, grab the latest commit SHA
+            cd openclaw_data
+            echo "local_hash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          else
+            # 2. Normal logic for schedule or push
+            cd app_repo
+            flutter pub get
+            dart run tools/check_sync.dart ../openclaw_data
+          fi
 
   build:
     needs: sync_check
